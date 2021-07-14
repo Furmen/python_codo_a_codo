@@ -1,0 +1,68 @@
+<table class="table table-striped">
+  <tr>
+    <th>Nro</th>
+    <th>Nombre</th>
+    <th>Correo Electrónico</th>
+    <th>Teléfono</th>
+    <th>Imagen</th>
+    <th>Acciones</th>
+  </tr>
+  <tbody>
+    {% for student in students %}
+      <tr>
+        <td>{{student.0}}</td>
+        <td>{{student.1}}</td>
+        <td>{{student.2}}</td>
+        <td>{{student.3}}</td>
+        <td>
+          {% if student.4 %}
+            <img src="{{'data:image/png;base64,' + student.4}}" alt="Red dot" />
+          {% else %}
+            <image src="{{url_for('static', filename = '/images/teacher.png' )}}" />
+          {% endif %}
+        </td>
+        <td>
+          <a href="/update/{{student.0}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{student.0}}">Editar</a>
+          <a href="/delete/{{ student.0 }}" class="btn btn-danger btn-xs" onclick="return confirm('Confirma su eliminación?')">Eliminar</a>
+        </td>
+      </tr>
+
+      <div id="modaledit{{student.0}}" class="modal fade" role="dialog">
+
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Actualizar información</h4>
+          </div>
+          <div class="modal-body">
+            <form action="{{ url_for('update') }}" method="POST">
+              <div class="form-group">
+                <label>Nombre:</label>
+                <input type="hidden"  name="id" value="{{student.0}}">
+                <input type="text" class="form-control" name="name" value="{{student.1}}">
+              </div>
+              <div class="form-group">
+                <label>Correo electrónico:</label>
+                <input type="text" class="form-control" name="email" value="{{student.2}}">
+              </div>
+              <div class="form-group">
+                <label>Teléfono:</label>
+                <input type="text" class="form-control" name="phone" value="{{student.3}}">
+              </div>
+              <div class="form-group">
+                <label>Imagen:</label>
+                <input type="file" class="form-control" name="image" value="{{student.4}}">
+              </div>
+              <div class="form-group text-right">
+                <button class="btn btn-primary" type="sbumit">Guardar</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor  %}
+  </tbody>
+</table>
