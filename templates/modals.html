@@ -21,9 +21,20 @@
             <label>Teléfono:</label>
             <input type="text" class="form-control" name="phone" required="1">
           </div>
-          <div class="form-group">
-            <label>Imagen:</label>
-            <input type="file" class="form-control" name="image">
+          <div class="row">
+            <div class="col-xs-6">
+              <div class="form-group">
+                <label>Imagen:</label>
+                <input type="file" class="form-control" name="image" onchange="convertImage()">
+                <input type="hidden" name="hdnImage" id="hdnImage" value="">
+              </div>
+            </div>
+            <div class="col-xs-6">
+              <div class="form-group">
+                <label>Preview:</label>
+                <img src="" width="50px" id="imgPreview" />
+              </div>
+            </div>
           </div>
           <div class="form-group text-right">
             <button class="btn btn-primary" type="submit">Guardar</button>

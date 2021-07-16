@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_mysqldb import MySQL
-import base64
 
 app = Flask(__name__)
 
@@ -28,14 +27,10 @@ def insert():
         name = request.form['name']
         email = request.form['email']
         phone = request.form['phone']
-        image = request.form['image']
-        
-        with open(image, "rb") as img_file:
-            image_string = base64.b64encode(img_file.read())
-        print(image_string)
-        
+        image = request.form['hdnImage']
+                
         cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO students (name, email, phone, image) VALUES (%s, %s, %s, %s)", (name, email, phone, image_string))
+        cur.execute("INSERT INTO students (name, email, phone, image) VALUES (%s, %s, %s, %s)", (name, email, phone, image))
         mysql.connection.commit()
         return redirect(url_for('Index'))
 
