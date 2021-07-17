@@ -11,6 +11,17 @@ app.config['MYSQL_DB'] = 'crud'
 
 mysql = MySQL(app)
 
+def validateStudentData(emailStudent):
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM students WHERE email=%s", (emailStudent,))
+    data = cur.fetchall()
+    cur.close()
+    
+    if data:
+        return False
+    
+    return True
+
 @app.route('/')
 def Index():
     cur = mysql.connection.cursor()
@@ -23,16 +34,20 @@ def Index():
 def insert():
 
     if request.method == "POST":
-        flash("Los datos fueron ingresados correctamente")
         name = request.form['name']
         email = request.form['email']
         phone = request.form['phone']
         image = request.form['hdnImage']
-                
-        cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO students (name, email, phone, image) VALUES (%s, %s, %s, %s)", (name, email, phone, image))
-        mysql.connection.commit()
-        return redirect(url_for('Index'))
+
+        if validateStudentData(email):        
+            cur = mysql.connection.cursor()
+            cur.execute("INSERT INTO students (name, email, phone, image) VALUES (%s, %s, %s, %s)", (name, email, phone, image))
+            mysql.connection.commit()
+            flash("Los datos fueron ingresados correctamente")
+            return redirect(url_for('Index'))
+        
+    flash("Error: El email ya se encuentra registrado. Por favor cambielo.")
+    return redirect(url_for('Index'))
 
 @app.route('/delete/<string:id_data>', methods=['GET'])
 def delete(id_data):
