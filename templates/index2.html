@@ -8,7 +8,7 @@
       <div class="col md-12">
             <h2>Listado de estudiantes 
                <button type="button" class="btn btn-success  pull-right" data-toggle="modal" data-target="#myModal">
-                  Agregar estudiante
+                  Agregar alumno
                </button>
             </h2>
 
@@ -39,17 +39,4 @@
 
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script>
-   function convertImage() {
-      var fileInput = $("[name=image]:visible")[0];
-
-      var reader = new FileReader();
-      reader.readAsDataURL(fileInput.files[0]);
-
-      reader.onload = function () {
-         let result = reader.result;
-         $("#hdnImage").val(result);
-         $("#imgPreview").attr("src", result);
-      };
-   }
-</script>
+<script type="text/javascript" src="../static/js/main.js"></script>
