@@ -44,7 +44,7 @@
               </div>
               <div class="form-group">
                 <label>Correo electrónico</label>
-                <input type="text" class="form-control" name="email" value="{{student.2}}">
+                <input type="text" class="form-control" name="email" value="{{student.2}}" disabled>
               </div>
               <div class="form-group">
                 <label>Teléfono</label>
@@ -53,12 +53,16 @@
               <div class="form-group">
                 <label>Imagen</label>
                 <input type="file" class="form-control" name="image" value="{{student.4}}" onchange="convertImage()">
-                <input type="hidden" name="hdnImage" id="hdnImage" value="">
+                <input type="hidden" name="hdnImage" id="hdnImage" value="{{student.4}}">
               </div>
-              <div class="form-group" id="imgPreviewContainer" style="display: none;">
+              <div class="form-group" id="imgPreviewContainer">
                 <label>Preview</label>
                 <br />
-                <img src="" width="50px" id="imgPreview" />
+                {% if student.4 %}
+                  <img src="{{student.4}}" width="50px" id="imgPreview" />
+                {% else %}
+                  <image src="{{url_for('static', filename = '/images/teacher.png' )}}" width="50px" id="imgPreview" />
+                {% endif %}
               </div>
             </form>
           </div>

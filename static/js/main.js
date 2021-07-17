@@ -6,14 +6,20 @@ function convertImage() {
 
     reader.onload = function() {
         let result = reader.result;
-        $("[id=hdnImage]:visible").val(result);
-        $("[id=imgPreview]:visible").attr("src", result);
-        $("[id=imgPreviewContainer]:visible").fadeIn();
+        $("#hdnImage").val(result);
+        $("#imgPreview").attr("src", result);
+        $("#imgPreviewContainer").fadeIn();
     };
 }
 
 function hideAlert() {
-    setTimeout(function() {
-        $(".alert").fadeOut();
-    }, 3000);
+    setInterval(function() {
+        if ($(".alert")) {
+            setTimeout(function() {
+                $(".alert").fadeOut();
+            }, 3000);
+        }
+    }, 500);
 }
+
+hideAlert();

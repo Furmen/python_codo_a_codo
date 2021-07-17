@@ -50,7 +50,7 @@ def update():
         name = request.form['name']
         email = request.form['email']
         phone = request.form['phone']
-        image = request.form['image']
+        image = request.form['hdnImage']
         cur = mysql.connection.cursor()
         cur.execute("""
                UPDATE students
