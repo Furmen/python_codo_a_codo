@@ -6,9 +6,14 @@ function convertImage() {
 
     reader.onload = function() {
         let result = reader.result;
-        $("#hdnImage").val(result);
-        $("#imgPreview").attr("src", result);
-        $("#imgPreviewContainer").fadeIn();
+        if ($("#frmNewStudent").is(":visible")) {
+            $("#hdnImageNew").val(result);
+            $("#imgPreviewNew").attr("src", result);
+            $("#imgPreviewContainerNew").fadeIn();
+        } else {
+            $("[name=hdnImageEdit]").val(result);
+            $("[name=imgPreviewEdit]").attr("src", result);
+        }
     };
 }
 

@@ -37,7 +37,7 @@ def insert():
         name = request.form['name']
         email = request.form['email']
         phone = request.form['phone']
-        image = request.form['hdnImage']
+        image = request.form['hdnImageNew']
 
         if validateStudentData(email):        
             cur = mysql.connection.cursor()
@@ -65,7 +65,7 @@ def update():
         name = request.form['name']
         email = request.form['email']
         phone = request.form['phone']
-        image = request.form['hdnImage']
+        image = request.form['hdnImageEdit']
         cur = mysql.connection.cursor()
         cur.execute("""
                UPDATE students
